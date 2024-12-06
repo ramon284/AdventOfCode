@@ -33,10 +33,8 @@ func check_order(first_list []string, first_char string, second_char string) boo
 	for _, combination := range first_list {
 		left := combination[:2]
 		right := combination[3:5]
-		if second_char == left {
-			if first_char == right {
-				return false
-			}
+		if second_char == left && first_char == right {
+			return false
 		}
 	}
 	return true
