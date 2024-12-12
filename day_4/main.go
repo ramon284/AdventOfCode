@@ -1,6 +1,7 @@
 package main
 
 import (
+	"AdventOfCode/benchmark"
 	"bufio"
 	"fmt"
 	"log"
@@ -21,17 +22,20 @@ func main() {
 		full_text = append(full_text, line)
 		i += 1
 	}
-
+	timer := benchmark.Start()
 	count_horizontal := checkHorizontal(full_text) // check in straight lines
 	pivoted_slice := pivotSlice(full_text)
 	count_vertical := checkHorizontal(pivoted_slice) // turn vertical lines horizontal, re-use the function
-
 	counter_diagonal := checkDiagonal(full_text)
+
 	fmt.Println(count_horizontal, count_vertical, counter_diagonal)
 	fmt.Println(count_horizontal + count_vertical + counter_diagonal)
+	timer.PrintElapsed() // 3.7 milliseconds
+	timer = benchmark.Start()
 
 	mas_count := masFinder(full_text)
 	fmt.Println(mas_count)
+	timer.PrintElapsed() // 1.6 milliseconds
 }
 
 func checkHorizontal(xmasList []string) int {

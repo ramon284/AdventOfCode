@@ -1,14 +1,47 @@
 package main
 
 import (
+	"AdventOfCode/benchmark"
 	"fmt"
-	"log"
 	"os"
 	"slices"
 	"strconv"
 	"strings"
-	"time"
 )
+
+func main() {
+	// read the file
+	content, err := os.ReadFile("puzzle_input_text.txt")
+	if err != nil {
+		fmt.Println("Error reading file:", err)
+		return
+	} // as strings into a slice
+	numberStrings := strings.Fields(string(content))
+	numbers := []int{}
+
+	for _, str := range numberStrings { // cast slice of strings to slice of ints
+		num, err := strconv.Atoi(str)
+		if err != nil {
+			fmt.Printf("Error converting %q to integer: %v\n", str, err)
+			return
+		}
+		numbers = append(numbers, num)
+	}
+
+	timer := benchmark.Start()
+	evenList, oddList := SplitList(numbers)
+	slices.Sort(evenList)
+	slices.Sort(oddList)
+	distance_list := distanceList(evenList, oddList)
+	timer.PrintElapsed() // 617 MICRO-seconds, 0.6ms
+	timer = benchmark.Start()
+	method_2 := SumList(distance_list)
+	fmt.Println(method_2)
+
+	new_score := similarity_score(evenList, oddList)
+	fmt.Println(new_score)
+	timer.PrintElapsed() // 2.2 milliseconds
+}
 
 func SplitList(full_list []int) ([]int, []int) {
 	even_list := []int{}
@@ -56,38 +89,4 @@ func SumList(numbers []int) int {
 		sum += num
 	}
 	return sum
-}
-
-func main() {
-	// read the file
-	content, err := os.ReadFile("puzzle_input_text.txt")
-	if err != nil {
-		fmt.Println("Error reading file:", err)
-		return
-	} // as strings into a slice
-	numberStrings := strings.Fields(string(content))
-	numbers := []int{}
-
-	for _, str := range numberStrings { // cast slice of strings to slice of ints
-		num, err := strconv.Atoi(str)
-		if err != nil {
-			fmt.Printf("Error converting %q to integer: %v\n", str, err)
-			return
-		}
-		numbers = append(numbers, num)
-	}
-
-	start := time.Now()
-	evenList, oddList := SplitList(numbers)
-	slices.Sort(evenList)
-	slices.Sort(oddList)
-	distance_list := distanceList(evenList, oddList)
-	method_2 := SumList(distance_list)
-	fmt.Println(method_2)
-
-	new_score := similarity_score(evenList, oddList)
-	log.Println(new_score)
-	elapsed := time.Since(start)
-	log.Printf("Binomial took %.4f ms", float64(elapsed.Nanoseconds())/1e6) // Milliseconds
-
 }

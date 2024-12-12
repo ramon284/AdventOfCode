@@ -1,6 +1,7 @@
 package main
 
 import (
+	"AdventOfCode/benchmark"
 	"bufio"
 	"fmt"
 	"log"
@@ -13,12 +14,15 @@ import (
 
 func main() {
 	full_list := load_into_slice("puzzle_input_text.txt")
+	timer := benchmark.Start()
 	assignment_1_solution, full_path := assignment_1(full_list)
 	fmt.Println(assignment_1_solution)
-	fmt.Println(full_path)
+	timer.PrintElapsed() // 8.46 milliseconds
+	timer = benchmark.Start()
 	full_list = load_into_slice("puzzle_input_text.txt")
 	assignment_2_solution := assignment_2(full_list, full_path)
 	fmt.Println(assignment_2_solution)
+	timer.PrintElapsed() // 14.42 seconds
 }
 
 func check_if_meets_path(i int, j int, path []areas) bool {

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"AdventOfCode/benchmark"
 	"bufio"
 	"fmt"
 	"log"
@@ -18,12 +19,14 @@ func main() {
 	input := read_file("puzzle_input_text.txt")
 	//input := read_file("test.txt")
 	//input := read_file("test2.txt")
+	timer := benchmark.Start()
 	output_map := assignment(input, false)
 	fmt.Println(len(output_map))
-	//fmt.Println(output_map)
+	timer.PrintElapsed() // 507 MICRO-seconds, 0.5ms
+	timer = benchmark.Start()
 	output_map_2 := assignment(input, true)
-	//fmt.Println(output_map_2)
 	fmt.Println(len(output_map_2))
+	timer.PrintElapsed() // 511 MICRO-seconds, 0.5ms
 }
 
 func assignment(input []string, assignment_2 bool) map[string]string {
@@ -42,14 +45,14 @@ func assignment(input []string, assignment_2 bool) map[string]string {
 		current_antenna := coordinate.antenna
 		current_x := coordinate.x_coordinate
 		current_y := coordinate.y_coordinate
-		if assignment_2 {
-			stringified_coordinates := strconv.FormatInt(int64(current_x), 10) + "|" + strconv.FormatInt(int64(current_y), 10)
-			mymap[stringified_coordinates] = stringified_coordinates
-		}
 		for _, other := range all_coordinates { // compare to other antenna towers
 			if current_antenna == other.antenna { // same signal?
 				if current_x == other.x_coordinate && current_y == other.y_coordinate {
 					continue
+				}
+				if assignment_2 {
+					stringified_coordinates := strconv.FormatInt(int64(current_x), 10) + "|" + strconv.FormatInt(int64(current_y), 10)
+					mymap[stringified_coordinates] = stringified_coordinates // every antenna should also be a signal spot in assignment_2
 				}
 				compare_col_loc, compare_row_loc := compare_locations(current_x, current_y, other.x_coordinate, other.y_coordinate)
 				new_x, new_y := calc_new_coordinates(current_x, current_y, other.x_coordinate, other.y_coordinate, compare_col_loc, compare_row_loc)

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"AdventOfCode/benchmark"
 	"bufio"
 	"fmt"
 	"log"
@@ -11,12 +12,16 @@ import (
 
 func main() {
 	first_list, second_list := retrieve_lists("puzzle_input_text.txt")
+	timer := benchmark.Start()
 	correct_combinations := check_pages_to_produce(first_list, second_list)
 	final_number := count_middle_numbers(correct_combinations)
 	fmt.Println(final_number)
+	timer.PrintElapsed() // 67 milliseconds
+	timer = benchmark.Start()
 	correct_combinations_2 := check_and_reorder_pages(first_list, second_list)
 	final_number_2 := count_middle_numbers(correct_combinations_2)
 	fmt.Println(final_number_2)
+	timer.PrintElapsed() // 252 milliseconds
 }
 
 func count_middle_numbers(correct_combinations [][]string) int {

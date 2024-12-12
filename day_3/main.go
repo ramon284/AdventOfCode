@@ -1,6 +1,7 @@
 package main
 
 import (
+	"AdventOfCode/benchmark"
 	"bufio"
 	"fmt"
 	"log"
@@ -26,6 +27,7 @@ func main() {
 	full_string := strings.Join(full_text, ",")
 
 	// Challenge #1
+	timer := benchmark.Start()
 	output_list := findMuls(full_string, false)
 	total_number := 0
 	for _, row := range output_list {
@@ -33,6 +35,8 @@ func main() {
 		total_number += multiplied_nr
 	}
 	fmt.Println(total_number)
+	timer.PrintElapsed() // 30 milliseconds
+	timer = benchmark.Start()
 
 	// Challenge #2
 	output_list2 := findMuls(full_string, true)
@@ -42,6 +46,7 @@ func main() {
 		total_number2 += multiplied_nr2
 	}
 	fmt.Println(total_number2)
+	timer.PrintElapsed() // 26 milliseconds
 }
 
 func findMuls(string_list string, bonus_assignment bool) [][]string { // returns a list containing parts to be multiplied

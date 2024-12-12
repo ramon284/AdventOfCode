@@ -1,6 +1,7 @@
 package main
 
 import (
+	"AdventOfCode/benchmark"
 	"bufio"
 	"fmt"
 	"log"
@@ -33,6 +34,7 @@ func main() {
 		full_list = append(full_list, row) // put the row into the final list
 
 	}
+	timer := benchmark.Start()
 	var count int
 	var count_with_dampener int
 	for _, row := range full_list {
@@ -41,7 +43,7 @@ func main() {
 	}
 	fmt.Println(count)
 	fmt.Println(count_with_dampener)
-
+	timer.PrintElapsed() // 537 MICRO-seconds, 0.5ms
 }
 
 // This function loops through every iteration of an "incorrect level"

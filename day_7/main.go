@@ -1,6 +1,7 @@
 package main
 
 import (
+	"AdventOfCode/benchmark"
 	"bufio"
 	"fmt"
 	"log"
@@ -21,18 +22,22 @@ type numbers_string_struct struct {
 
 func main() {
 	test := load_nrs("puzzle_input_text.txt")
+	timer := benchmark.Start()
 	correct, incorrect_assigments := assignment_1(test)
 	var final_count_1 int
 	for _, v := range correct {
 		final_count_1 += v.first_value
 	}
 	fmt.Println(final_count_1)
+	timer.PrintElapsed() // 11.6 milliseconds
+	timer = benchmark.Start()
 	correct_with_pipes := assignment_2(incorrect_assigments)
 	var final_count_2 int
 	for _, v := range correct_with_pipes {
 		final_count_2 += v.first_value
 	}
 	fmt.Println(final_count_1, "+", final_count_2, "=", final_count_1+final_count_2)
+	timer.PrintElapsed() // 402 milliseconds
 }
 
 func assignment_2(assignments []numbers_struct) []numbers_struct {
