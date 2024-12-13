@@ -22,11 +22,11 @@ func main() {
 	timer := benchmark.Start()
 	output_map := assignment(input, false)
 	fmt.Println(len(output_map))
-	timer.PrintElapsed() // 507 MICRO-seconds, 0.5ms
+	timer.PrintElapsed() // 507 microseconds, 0.5ms
 	timer = benchmark.Start()
 	output_map_2 := assignment(input, true)
 	fmt.Println(len(output_map_2))
-	timer.PrintElapsed() // 511 MICRO-seconds, 0.5ms
+	timer.PrintElapsed() // 511 microseconds, 0.5ms
 }
 
 func assignment(input []string, assignment_2 bool) map[string]string {

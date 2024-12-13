@@ -43,7 +43,7 @@ func main() {
 	}
 	fmt.Println(count)
 	fmt.Println(count_with_dampener)
-	timer.PrintElapsed() // 537 MICRO-seconds, 0.5ms
+	timer.PrintElapsed() // 537 microseconds, 0.5ms
 }
 
 // This function loops through every iteration of an "incorrect level"

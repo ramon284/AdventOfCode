@@ -33,14 +33,14 @@ func main() {
 	slices.Sort(evenList)
 	slices.Sort(oddList)
 	distance_list := distanceList(evenList, oddList)
-	timer.PrintElapsed() // 617 MICRO-seconds, 0.6ms
+	timer.PrintElapsed() // 0s (?)
 	timer = benchmark.Start()
 	method_2 := SumList(distance_list)
 	fmt.Println(method_2)
 
 	new_score := similarity_score(evenList, oddList)
 	fmt.Println(new_score)
-	timer.PrintElapsed() // 2.2 milliseconds
+	timer.PrintElapsed() // 523 microseconds
 }
 
 func SplitList(full_list []int) ([]int, []int) {

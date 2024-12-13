@@ -30,12 +30,12 @@ func main() {
 
 	fmt.Println(count_horizontal, count_vertical, counter_diagonal)
 	fmt.Println(count_horizontal + count_vertical + counter_diagonal)
-	timer.PrintElapsed() // 3.7 milliseconds
+	timer.PrintElapsed() // 3 milliseconds
 	timer = benchmark.Start()
 
 	mas_count := masFinder(full_text)
 	fmt.Println(mas_count)
-	timer.PrintElapsed() // 1.6 milliseconds
+	timer.PrintElapsed() // 1.1 milliseconds
 }
 
 func checkHorizontal(xmasList []string) int {

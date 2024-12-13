@@ -29,7 +29,7 @@ func main() {
 		final_count_1 += v.first_value
 	}
 	fmt.Println(final_count_1)
-	timer.PrintElapsed() // 11.6 milliseconds
+	timer.PrintElapsed() // 6.3 milliseconds
 	timer = benchmark.Start()
 	correct_with_pipes := assignment_2(incorrect_assigments)
 	var final_count_2 int
@@ -37,7 +37,7 @@ func main() {
 		final_count_2 += v.first_value
 	}
 	fmt.Println(final_count_1, "+", final_count_2, "=", final_count_1+final_count_2)
-	timer.PrintElapsed() // 402 milliseconds
+	timer.PrintElapsed() // 217 milliseconds
 }
 
 func assignment_2(assignments []numbers_struct) []numbers_struct {
