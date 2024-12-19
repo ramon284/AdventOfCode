@@ -45,6 +45,7 @@ func order_files_array_part_2(some_array []string, filesize_map map[string]int) 
 					// indexes are implicit, its j in range value_size and i in range value_size
 					for h := 0; h < value_size; h++ {
 						if array_copy[j+h] != "." { // not enough space
+							j += h
 							continue forward_loop
 						}
 					}
@@ -52,6 +53,7 @@ func order_files_array_part_2(some_array []string, filesize_map map[string]int) 
 						array_copy[j+h] = value
 						array_copy[i-h] = "."
 					}
+					i -= value_size - 1
 					break
 				}
 			}
